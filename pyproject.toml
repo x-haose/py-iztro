@@ -1,0 +1,120 @@
+[project]
+name = "py-iztro"
+version = "0.1.2"
+description = "python 版iztro紫薇排盘工具"
+authors = [
+    { name = "昊色居士", email = "xhrtxh@gmail.com" }
+]
+dependencies = [
+    "pythonmonkey>=1.1.0",
+    "pydantic>=2.10.6",
+]
+readme = "README.md"
+requires-python = ">= 3.10"
+
+[project.urls]
+homepage = "https://github.com/x-haose/py-iztro"
+repository = "https://github.com/x-haose/py-iztro"
+documentation = "https://github.com/x-haose/py-iztro"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "twine>=6.1.0",
+    "pre-commit>=4.1.0",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/py_iztro"]
+
+[tool.bandit]
+skips = [
+    "B501",
+    "B113"
+]
+
+[tool.ruff]
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+]
+
+# Same as Black.
+line-length = 120
+indent-width = 4
+
+# Assume Python 3.12
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle error
+    "E",
+    # Pyflakes
+    "F",
+    # pycodestyle warnings
+    "W",
+    # pyupgrade
+    "UP",
+    # flake8-comprehensions
+    "C",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+]
+ignore = [
+    # do not perform function calls in argument defaults
+    "B008",
+    # too complex
+    "C901",
+]
+fixable = ["ALL"]
+unfixable = []
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+
+
+[tool.rye.scripts]
+publish_testpypi = { cmd = "rye run twine upload -r testpypi dist/*" }
+publish_pypi = { cmd = "rye run twine upload dist/*" }
+sb = { cmd = "rye build --clean" }
+spt = { chain = ["sb", "publish_testpypi"] }
+sp = { chain = ["sb", "publish_pypi"] }
+check_i = { cmd = "rye run pre-commit install" }
+check = { cmd = "rye run pre-commit run --all-files" }
