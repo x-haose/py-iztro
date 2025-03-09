@@ -2,12 +2,14 @@
 # py-iztro
 
 著名紫薇排盘工具[iztro](https://github.com/SylarLong/iztro)python版本，用法和原版完全一致
+感觉好用的话麻烦给颗✨✨
 
 ## 特性
 
 - 使用和原本完成一致
 - 使用python版js解释器之间运行源代码逻辑完成一致
 - 使用`pydantic`对代码模型进行完全注解及注释
+- 基于`iztro`版本：2.4.4
 - 积极开发接受建议，欢迎提`issues`
 
 
