@@ -2,6 +2,7 @@
 # py-iztro
 
 著名紫薇排盘工具[iztro](https://github.com/SylarLong/iztro)python版本，用法和原版完全一致
+
 感觉好用的话麻烦给颗✨✨
 
 ## 特性
