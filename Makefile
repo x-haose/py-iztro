@@ -1,6 +1,6 @@
 .PHONY: sb spt sp check check_i
 
-sb:
+build:
 	rm -rf ./dist
 	uv build
 
