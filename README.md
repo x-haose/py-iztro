@@ -4,7 +4,7 @@
 著名紫薇排盘工具[iztro](https://github.com/SylarLong/iztro)python版本，用法和原版完全一致
 
 感觉好用的话麻烦给颗✨✨
-
+pythonmonkey
 ## 特性
 
 - 使用和原本完成一致
