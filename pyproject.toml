@@ -1,6 +1,6 @@
 [project]
 name = "py-iztro"
-version = "0.1.4"
+version = "0.1.5"
 description = "python 版iztro紫薇排盘工具"
 authors = [
     { name = "昊色居士", email = "xhrtxh@gmail.com" }

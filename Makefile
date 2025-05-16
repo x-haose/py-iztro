@@ -10,9 +10,9 @@ publish_testpypi:
 publish_pypi:
 	uv run twine upload dist/*
 
-test: sb publish_testpypi
+test: build publish_testpypi
 
-release: sb publish_pypi
+release: build publish_pypi
 
 check:
 	uv run pre-commit run --all-files

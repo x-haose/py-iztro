@@ -1,3 +1,4 @@
+from enum import Enum
 from typing import Any, Literal
 
 from pydantic import BaseModel, Field, PrivateAttr
@@ -169,8 +170,8 @@ class AstrolabeModel(BaseModel):
         """
         result = self._js_astro_obj.horoscope(date, time_index)
 
-        def _get_horoscope_item_dict(_data: dict) -> dict:
-            _new_data = dict(
+        def _get_horoscope_item_dict(_data: dict | Any) -> dict:
+            _new_data: dict[str, Any] = dict(
                 _data,
                 palaceNames=list(_data["palaceNames"]),
                 mutagen=list(_data["mutagen"]),
@@ -207,3 +208,67 @@ class AstrolabeModel(BaseModel):
             astro.palaces.append(p)
         astro._js_astro_obj = js_astro_obj
         return astro
+
+
+class YearDivideEnum(str, Enum):
+    """
+    年分割点枚举
+    """
+
+    # 正月初一分界
+    NORMAL = "normal"
+    # 立春分界
+    EXACT = "exact"
+
+
+class AgeDivideEnum(str, Enum):
+    """
+    小限分割点枚举
+    """
+
+    # 只考虑年份，不考虑生日
+    NORMAL = "normal"
+    # 以生日为分界点
+    BIRTHDAY = "birthday"
+
+
+class AlgorithmEnum(str, Enum):
+    """
+    紫薇派别
+    """
+
+    # 以《紫微斗数全书》为基础安星
+    DEFAULT = "default"
+    # 以中州派安星法为基础安星
+    ZHONGZHOU = "zhongzhou"
+
+
+class ConfigModel(BaseModel):
+    """
+    配置模型
+    """
+
+    # 四化表配置。如：
+    #   { 庚: ['太阳', '武曲', '天同', '天相'] }
+    mutagens: dict[str, list[str]] | None = Field(default_factory=dict, title="四化表的配置")
+    # 星耀在十二宫的亮度配置 如
+    #   { 贪狼: ['旺', '旺', '旺', '旺', '旺', '旺', '旺', '旺', '旺', '旺', '旺', '旺'] }
+    brightness: dict[str, list[str]] | None = Field(default_factory=dict, title="星耀在十二宫的亮度")
+    # 年分割点配置
+    #   - YearDivideEnum.NORMA: 正月初一分界
+    #   - YearDivideEnum.EXACT: 立春分界
+    year_divide: YearDivideEnum | None = Field(default=YearDivideEnum.NORMAL, title="年分割点", alias="yearDivide")
+    # 小限分割点
+    #   - AgeDivideEnum.NORMA: 只考虑年份，不考虑生日
+    #   - AgeDivideEnum.BIRTHDAY: 以生日为分界点
+    age_divide: AgeDivideEnum | None = Field(default=AgeDivideEnum.NORMAL, title="小限分割点", alias="ageDivide")
+    # 运限分割点配置
+    #   - YearDivideEnum.NORMA: 正月初一分界
+    #   - YearDivideEnum.EXACT: 立春分界
+    horoscope_divide: YearDivideEnum | None = Field(
+        default=YearDivideEnum.NORMAL, title="xx分割点", alias="horoscopeDivide"
+    )
+    # 安星方法
+    #   - AlgorithmEnum.DEFAULT: 以《紫微斗数全书》为基础安星
+    #   - AlgorithmEnum.ZHONGZHOU: 以中州派安星法为基础安星
+    algorithm: AlgorithmEnum | None = Field(default=AlgorithmEnum.DEFAULT, title="紫微派别")
