@@ -1,5 +1,6 @@
 
 # py-iztro
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/x-haose/py-iztro)
 
 著名紫薇排盘工具[iztro](https://github.com/SylarLong/iztro)python版本，用法和原版完全一致
 
