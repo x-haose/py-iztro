@@ -85,7 +85,7 @@ class PalaceModel(BaseModel):
     boshi12: str = Field(alias="boshi12", title="博士12神")
     jiangqian12: str = Field(alias="jiangqian12", title="流年将前12神")
     suiqian12: str = Field(alias="suiqian12", title="流年岁前12神")
-    decadal: DecadalModel = Field(alias="decadal", title="大限", default_factory=DecadalModel)
+    decadal: DecadalModel = Field(alias="decadal", title="大限")
     ages: list[int] = Field(alias="ages", title="小限")
 
 
@@ -157,7 +157,7 @@ class AstrolabeModel(BaseModel):
 
     _js_astro_obj: Any = PrivateAttr()
 
-    def horoscope(self, date: str | None = None, time_index: TimeIndexType | None = None):
+    def horoscope(self, date: str | None = None, time_index: TimeIndexType | None = None) -> HoroscopeModel:
         """
         获取运限数据
 
@@ -170,29 +170,31 @@ class AstrolabeModel(BaseModel):
         """
         result = self._js_astro_obj.horoscope(date, time_index)
 
-        def _get_horoscope_item_dict(_data: dict | Any) -> dict:
+        def _get_horoscope_item_dict(
+            _data: dict[str, str | list[str]],
+        ) -> dict[str, str | float | list[str] | list[list[StarModel]]]:
             _new_data: dict[str, Any] = dict(
                 _data,
                 palaceNames=list(_data["palaceNames"]),
                 mutagen=list(_data["mutagen"]),
-                stars=[[StarModel(**star) for star in stars] for stars in _data.stars or []],
+                stars=[[StarModel(**star) for star in stars] for stars in _data.stars or []],  # type: ignore
             )
             if _data["yearlyDecStar"]:
                 _new_data["yearlyDecStar"] = HoroscopeItemYearlyModel.YearlyDecStarModel(
-                    jiangqian12=list(_data["yearlyDecStar"]["jiangqian12"]),
-                    suiqian12=list(_data["yearlyDecStar"]["suiqian12"]),
+                    jiangqian12=list(_data["yearlyDecStar"]["jiangqian12"]),  # type: ignore
+                    suiqian12=list(_data["yearlyDecStar"]["suiqian12"]),  # type: ignore
                 )
             return _new_data
 
         return HoroscopeModel(
             lunarDate=result.lunarDate,
             solarDate=result.solarDate,
-            decadal=HoroscopeItemModel(**_get_horoscope_item_dict(result.decadal)),
-            age=HoroscopeItemAgeModel(**_get_horoscope_item_dict(result.age)),
-            yearly=HoroscopeItemYearlyModel(**_get_horoscope_item_dict(result.yearly)),
-            monthly=HoroscopeItemModel(**_get_horoscope_item_dict(result.monthly)),
-            daily=HoroscopeItemModel(**_get_horoscope_item_dict(result.daily)),
-            hourly=HoroscopeItemModel(**_get_horoscope_item_dict(result.hourly)),
+            decadal=HoroscopeItemModel.model_validate(_get_horoscope_item_dict(result.decadal)),
+            age=HoroscopeItemAgeModel.model_validate(_get_horoscope_item_dict(result.age)),
+            yearly=HoroscopeItemYearlyModel.model_validate(_get_horoscope_item_dict(result.yearly)),
+            monthly=HoroscopeItemModel.model_validate(_get_horoscope_item_dict(result.monthly)),
+            daily=HoroscopeItemModel.model_validate(_get_horoscope_item_dict(result.daily)),
+            hourly=HoroscopeItemModel.model_validate(_get_horoscope_item_dict(result.hourly)),
         )
 
     @classmethod

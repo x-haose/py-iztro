@@ -1,14 +1,8 @@
 from importlib import resources
 
-import pythonmonkey as pm
+import pythonmonkey as pm  # type: ignore
 
-from py_iztro.core.models import (
-    AstrolabeModel,
-    ConfigModel,
-    GenderType,
-    LangueType,
-    TimeIndexType,
-)
+from py_iztro.core.models import AstrolabeModel, ConfigModel, GenderType, LangueType, TimeIndexType
 
 
 class Astro:
@@ -114,4 +108,6 @@ class Astro:
         data = ConfigModel(**result)
         data.mutagens = {k: list(v) for k, v in result["mutagens"].items()}
         data.brightness = {k: list(v) for k, v in result["brightness"].items()}
+        return data
+        return data
         return data
