@@ -1,5 +1,7 @@
 
 # py-iztro
+[![pypi](https://img.shields.io/badge/pypi-v0.1-blue)](https://pypi.org/project/py-iztro/)
+[![codecov](https://codecov.io/gh/JinyangWang27/py-iztro/graph/badge.svg?token=QFWA4XR1HC)](https://codecov.io/gh/JinyangWang27/py-iztro)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/x-haose/py-iztro)
 
 著名紫薇排盘工具[iztro](https://github.com/SylarLong/iztro)python版本，用法和原版完全一致
