@@ -4,7 +4,7 @@
 [![codecov](https://codecov.io/gh/JinyangWang27/py-iztro/graph/badge.svg?token=QFWA4XR1HC)](https://codecov.io/gh/JinyangWang27/py-iztro)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/x-haose/py-iztro)
 
-著名紫薇排盘工具[iztro](https://github.com/SylarLong/iztro)python版本，用法和原版完全一致
+著名紫微排盘工具[iztro](https://github.com/SylarLong/iztro)python版本，用法和原版完全一致
 
 感觉好用的话麻烦给颗✨✨
 
@@ -1668,4 +1668,4 @@ if __name__ == '__main__':
 
 ## 致谢
 
- - [最好的紫薇排盘工具：iztro](https://github.com/SylarLong/iztro)
+ - [最好的紫微排盘工具：iztro](https://github.com/SylarLong/iztro)
