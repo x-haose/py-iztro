@@ -5,7 +5,7 @@ from pydantic import BaseModel, Field, PrivateAttr
 
 TimeIndexType = Literal[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 GenderType = Literal["男", "女"]
-LangueType = Literal["en-US", "ja-JP", "ko-KR", "zh-CN", "zh-TW", "vi-VN"]
+LanguageType = Literal["en-US", "ja-JP", "ko-KR", "zh-CN", "zh-TW", "vi-VN"]
 StarType = Literal["major", "soft", "tough", "adjective", "flower", "helper", "lucun", "tianma"]
 
 
