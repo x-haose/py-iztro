@@ -1,7 +1,7 @@
 [project]
 name = "py-iztro"
 version = "0.1.5"
-description = "python 版iztro紫薇排盘工具"
+description = "python版iztro紫微排盘工具"
 authors = [
     { name = "昊色居士", email = "xhrtxh@gmail.com" }
 ]
@@ -21,6 +21,8 @@ documentation = "https://github.com/x-haose/py-iztro"
 dev = [
     "pre-commit>=4.2.0",
     "twine>=6.1.0",
+    "pytest",
+    "pytest-cov"
 ]
 
 [build-system]
@@ -104,3 +106,11 @@ unfixable = []
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]
+
+[tool.pytest.ini_options]
+testpaths = "tests/"
+addopts = "--cov --cov-report html --cov-report term-missing --cov-fail-under 80"
+
+[tool.coverage]
+[tool.coverage.run]
+source = ["src"]

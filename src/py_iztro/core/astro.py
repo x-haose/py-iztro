@@ -1,14 +1,8 @@
 from importlib import resources
 
-import pythonmonkey as pm
+import pythonmonkey as pm  # type: ignore
 
-from py_iztro.core.models import (
-    AstrolabeModel,
-    ConfigModel,
-    GenderType,
-    LangueType,
-    TimeIndexType,
-)
+from py_iztro.core.models import AstrolabeModel, ConfigModel, GenderType, LanguageType, TimeIndexType
 
 
 class Astro:
@@ -23,7 +17,7 @@ class Astro:
         time_index: TimeIndexType,
         gender: GenderType,
         fix_leap: bool = True,
-        language: LangueType = "zh-CN",
+        language: LanguageType = "zh-CN",
     ) -> AstrolabeModel:
         """
         通过阳历获取星盘信息
@@ -61,7 +55,7 @@ class Astro:
         time_index: TimeIndexType,
         gender: GenderType,
         fix_leap: bool = True,
-        language: LangueType = "zh-CN",
+        language: LanguageType = "zh-CN",
     ) -> AstrolabeModel:
         """
         通过农历获取星盘信息
