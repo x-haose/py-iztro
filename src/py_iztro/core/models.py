@@ -174,7 +174,7 @@ class AstrolabeModel(BaseModel):
             _data: dict[str, str | list[str]],
         ) -> dict[str, str | float | list[str] | list[list[StarModel]]]:
             _new_data: dict[str, Any] = dict(
-                _data,
+                **_data,
                 palaceNames=list(_data["palaceNames"]),
                 mutagen=list(_data["mutagen"]),
                 stars=[[StarModel(**star) for star in stars] for stars in _data.stars or []],  # type: ignore
