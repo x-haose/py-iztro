@@ -35,7 +35,8 @@ packages = ["src/py_iztro"]
 [tool.bandit]
 skips = [
     "B501",
-    "B113"
+    "B113",
+    "B101"
 ]
 
 [tool.ruff]
